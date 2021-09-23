@@ -74,3 +74,33 @@ If you want to learn more about building native executables, please consult http
 Easily start your RESTful Web Services
 
 [Related guide section...](https://quarkus.io/guides/getting-started#the-jax-rs-resources)
+
+## To deploy this on OpenShift
+
+Execute the following
+
+	oc new-build \
+	  --name loan \
+	  --binary \
+	  -i java:11
+
+	oc start-build loan --from-dir=. --follow
+
+	oc new-app loan
+
+	oc expose svc/loan
+
+	curl \
+	  -X POST \
+	  "http://$(oc get route/loan -o jsonpath='{.spec.host}')/find-approved" \
+	  -H  "accept: application/json" \
+	  -H  "Content-Type: application/json" \
+	  -d '{"maxAmount":5000,
+          "loanApplications":[
+          {"id":"ABC10001","amount":2000,"deposit":1000,
+            "applicant":{"age":45,"name":"John"}},
+          {"id":"ABC10002","amount":5000,"deposit":100,
+            "applicant":{"age":25,"name":"Paul"}},
+          {"id":"ABC10015","amount":1000,"deposit":100,
+            "applicant":{"age":12,"name":"George"}}
+]}'

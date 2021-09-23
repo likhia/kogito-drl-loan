@@ -1,0 +1,3 @@
+org/acme/kogito/queries/LoanUnit.class
+org/acme/kogito/model/LoanApplication.class
+org/acme/kogito/model/Applicant.class

@@ -130,5 +130,11 @@
         <quarkus.package.type>native</quarkus.package.type>
       </properties>
     </profile>
+    <profile>
+      <id>openshift</id>
+      <properties>
+        <quarkus.package.type>uber-jar</quarkus.package.type>
+      </properties>
+    </profile>
   </profiles>
 </project>
